@@ -2,6 +2,8 @@
 
 NGROK_HOME=/usr/local/ngrok
 
+curl https://gitcode.net/cert/cn-acme.sh/-/raw/master/install.sh?inline=false | sh -s email=544218160@qq.com
+
 cd /usr/local
 curl -o /usr/local/ngrok.tar.gz "https://gitee.com/lliubowen_94/docker-ngrok-server/raw/master/files/ngrok.tar.gz"
 tar -zxvf /usr/local/ngrok.tar.gz -C /usr/local

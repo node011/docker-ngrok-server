@@ -11,7 +11,6 @@ COPY entrypoint.sh /sbin/entrypoint.sh
 RUN chmod 755 /sbin/entrypoint.sh \
   && yum install -y epel-release \
   && yum install -y golang openssl \
-  && curl https://gitcode.net/cert/cn-acme.sh/-/raw/master/install.sh?inline=false | sh -s email=544218160@qq.com
 
 #  && curl -o /tmp/ngrok.tar.gz "https://gitee.com/lliubowen_94/docker-ngrok-server/raw/master/files/ngrok.tar.gz" \
 #  && tar -zxvf /tmp/ngrok.tar.gz -C /usr/local \
