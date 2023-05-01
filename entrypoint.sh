@@ -2,12 +2,15 @@
 
 NGROK_HOME=/usr/local/ngrok
 
-curl https://gitcode.net/cert/cn-acme.sh/-/raw/master/install.sh?inline=false | sh -s email=544218160@qq.com
+#curl https://gitcode.net/cert/cn-acme.sh/-/raw/master/install.sh?inline=false | sh -s email=544218160@qq.com
+#
+#cd /usr/local
+#curl -o /usr/local/ngrok.tar.gz "https://gitee.com/lliubowen_94/docker-ngrok-server/raw/master/files/ngrok.tar.gz"
+#tar -zxvf /usr/local/ngrok.tar.gz -C /usr/local
+#rm -rf /usr/local/ngrok.tar.gz
 
-cd /usr/local
-curl -o /usr/local/ngrok.tar.gz "https://gitee.com/lliubowen_94/docker-ngrok-server/raw/master/files/ngrok.tar.gz"
-tar -zxvf /usr/local/ngrok.tar.gz -C /usr/local
-rm -rf /usr/local/ngrok.tar.gz
+# 创建证书目录
+mkidr -p /usr/local/certs
 
 cd $NGROK_HOME
 
@@ -28,16 +31,6 @@ if [ ! -f "build.info" ]; then
 #  \cp rootCA.pem assets/client/tls/ngrokroot.crt
 #  \cp device.crt assets/server/tls/snakeoil.crt
 #  \cp device.key assets/server/tls/snakeoil.key
-
-  # 下载acme
-#  curl https://gitcode.net/cert/cn-acme.sh/-/raw/master/install.sh?inline=false | sh -s email=544218160@qq.com
-
-  # 创建证书
-  /root/.acme.sh/acme.sh --issue -d *.liubowen.top  --dns dns_dp --server https://acme.freessl.cn/v2/DV90/directory/6ypodielc08odfc8tgp6
-  # 复制证书
-  \cp /root/.acme.sh/*.liubowen.top_ecc/ca.cer assets/client/tls/ngrokroot.crt
-  \cp /root/.acme.sh/*.liubowen.top_ecc/*.liubowen.top.key assets/server/tls/snakeoil.key
-  \cp /root/.acme.sh/*.liubowen.top_ecc/*.liubowen.top.cer assets/server/tls/snakeoil.crt
 
   make release-server
   make release-client
@@ -62,4 +55,4 @@ HTTP_PORT=$(sed -n "2p" build.info)
 HTTPS_PORT=$(sed -n "3p" build.info)
 TUNNEL_PORT=$(sed -n "4p" build.info)
 
-./bin/ngrokd -tlsKey=assets/server/tls/snakeoil.key -tlsCrt=assets/server/tls/snakeoil.crt -domain="$DOMAIN" -httpAddr=":$HTTP_PORT" -httpsAddr=":$HTTPS_PORT" -tunnelAddr=":$TUNNEL_PORT"
+./bin/ngrokd -tlsKey=/usr/local/certs/$($DOMAIN).key -tlsCrt=/usr/local/certs/$($DOMAIN)_integrated.crt -domain="$DOMAIN" -httpAddr=":$HTTP_PORT" -httpsAddr=":$HTTPS_PORT" -tunnelAddr=":$TUNNEL_PORT"
