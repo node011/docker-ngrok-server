@@ -18,7 +18,7 @@ RUN chmod 755 /sbin/entrypoint.sh \
 RUN curl https://gitcode.net/cert/cn-acme.sh/-/raw/master/install.sh?inline=false | sh -s email=544218160@qq.com
 
 # 允许指定的端口
-EXPOSE 80/tcp 443/tcp 8081/tcp 8082/tcp
+EXPOSE 80/tcp 443/tcp 4443/tcp
 
 # 指定ngrok运行入口
 ENTRYPOINT ["/sbin/entrypoint.sh"]
