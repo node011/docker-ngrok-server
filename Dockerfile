@@ -2,7 +2,7 @@
 FROM centos:7
 
 # 维护者信息
-MAINTAINER jueying hhbvictory@163.com
+MAINTAINER bowen 544218160@qq.com
 
 # 复制脚本文件到容器目录中
 COPY entrypoint.sh /sbin/entrypoint.sh

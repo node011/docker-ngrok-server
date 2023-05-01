@@ -14,6 +14,10 @@ docker pull jueying/ngrok-server
 
 # 考虑到国内访问docker hub很慢，也可以通过下面命令构建镜像：
 docker build -t jueying/ngrok-server https://github.com/jueying/docker-ngrok-server.git
+
+
+docker build -t bowen/ngrok-server https://gitee.com/lliubowen_94/docker-ngrok-server.git
+
 ```
 
 ### 2. 在后台运行容器:
