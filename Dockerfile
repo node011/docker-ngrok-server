@@ -8,7 +8,8 @@ MAINTAINER bowen 544218160@qq.com
 COPY entrypoint.sh /sbin/entrypoint.sh
 
 # 运行指令
-RUN wget -O /tmp/ngrok.tar.gz "https://gitee.com/lliubowen_94/docker-ngrok-server/raw/master/files/ngrok.tar.gz" \
+RUN yum -y install wget \
+  && wget -O /tmp/ngrok.tar.gz "https://gitee.com/lliubowen_94/docker-ngrok-server/raw/master/files/ngrok.tar.gz" \
   && tar -zxvf /tmp/ngrok.tar.gz -C /usr/local \
   && rm -rf /tmp/ngrok.tar.gz \
   && chmod 755 /sbin/entrypoint.sh \
