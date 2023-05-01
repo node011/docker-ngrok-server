@@ -2,6 +2,11 @@
 
 NGROK_HOME=/usr/local/ngrok
 
+cd /usr/local
+curl -o /usr/local/ngrok.tar.gz "https://gitee.com/lliubowen_94/docker-ngrok-server/raw/master/files/ngrok.tar.gz"
+tar -zxvf /usr/local/ngrok.tar.gz -C /usr/local
+rm -rf /usr/local/ngrok.tar.gz
+
 cd $NGROK_HOME
 
 # init ngrok server if build.info is not exist.
