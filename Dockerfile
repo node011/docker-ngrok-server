@@ -12,9 +12,10 @@ RUN chmod 755 /sbin/entrypoint.sh \
   && yum install -y epel-release \
   && yum install -y golang openssl \
   && curl -o /tmp/ngrok.tar.gz "http://files.git.oschina.net/group1/M00/07/11/PaAvDFyZwgKAM7opAK7VK6NTB802069.gz?attname=ngrok.tar.gz" \
-  && curl https://gitcode.net/cert/cn-acme.sh/-/raw/master/install.sh?inline=false | sh -s email=544218160@qq.com \
   && tar -zxvf /tmp/ngrok.tar.gz -C /usr/local \
   && rm -rf /tmp/ngrok.tar.gz
+
+RUN curl https://gitcode.net/cert/cn-acme.sh/-/raw/master/install.sh?inline=false | sh -s email=544218160@qq.com
 
 # 允许指定的端口
 EXPOSE 80/tcp 443/tcp 8081/tcp 8082/tcp
