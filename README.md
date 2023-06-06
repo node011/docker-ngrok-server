@@ -58,7 +58,7 @@ ngrok.exe -subdomain=subdomain -config=ngrok.cfg local_port
 . /ngrok -config=ngrok.cfg start-all
 
 ```
-You can [download](https://github.com/jueying/docker-ngrok-server/blob/master/files/ngrok-client.rar) my ngrok client configuration in the files folder, then modify your domain name and replace it with your ngrok client.
+You can [download](https://github.com/node011/docker-ngrok-server/raw/master/files/ngrok-client.rar) my ngrok client configuration in the files folder, then modify your domain name and replace it with your ngrok client.
 
 ---
 ## Caution.
