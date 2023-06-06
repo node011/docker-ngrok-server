@@ -32,7 +32,7 @@ The runtime takes some time to compile and generate the ngrok server and client,
 docker logs -t -f --tail=100 ngrok-server
 ```
 When the following logs appear, it means the startup is successful
-! [info]https://raw.githubusercontent.com/jueying/docker-ngrok-server/master/files/ngrokd_start.jpg
+! https://raw.githubusercontent.com/jueying/docker-ngrok-server/master/files/ngrokd_start.jpg
 
 ### 3. Copy the ngrok client from the container.
 ```
@@ -43,7 +43,7 @@ The clients for win64, win32 and macos64 can be found in /tmp/bin/
 ### 4. ngrok configuration usage.
 
 1. pan-resolve your independent domain name to docker's host IP
-! [info]https://raw.githubusercontent.com/jueying/docker-ngrok-server/master/files/domain.jpg
+! https://raw.githubusercontent.com/jueying/docker-ngrok-server/master/files/domain.jpg
 
 2. Copy the corresponding ngrok client from the container, and then create a configuration file ngrok.cfg in the same level directory, with the following content:
 ```
