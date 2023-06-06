@@ -1,18 +1,18 @@
 
 # docker image for ngrok server
 
- ngrok服务器的docker image，用来做内网穿透。
+ docker image for ngrok server, used for intranet penetration.
  
- **可以直接下载附件中的ngrok客户端使用**
-  
-## 使用步骤：
+ **You can directly download the attached ngrok client to use**
+  
+## Steps to use:
 ----------------
-### 1. 获取这个镜像:
+### 1. Get this image.
 ```
-# 直接从docker仓库拉取镜像
+## Pull the image directly from the docker repository
 docker pull jueying/ngrok-server
 
-# 考虑到国内访问docker hub很慢，也可以通过下面命令构建镜像：
+# Considering the slow access to docker hub in China, you can also build the image with the following command:
 docker build -t jueying/ngrok-server https://github.com/jueying/docker-ngrok-server.git
 
 
@@ -20,47 +20,47 @@ docker build -t bowen/ngrok-server https://gitee.com/lliubowen_94/docker-ngrok-s
 
 ```
 
-### 2. 在后台运行容器:
+### 2. Run the container in the background.
 ```
-docker run -d --name ngrok-server -p 主机http端口:容器http端口 -p 主机https端口:容器https端口 -p 隧道port:隧道port jueying/ngrok-server 域名 容器http端口 主机https端口 隧道port
+docker run -d --name ngrok-server -p host http port:container http port -p host https port:container https port -p tunnel port:tunnel port jueying/ngrok-server domain name container http port host https port tunnel port
 
-例如:
+Example.
 docker run -d --name ngrok-server -p 80:80 -p 443:443 -p 4443:4443 jueying/ngrok-server mydomain.cn 80 443 4443
 ```
-运行时需要一些时间编译生成ngrok服务端和客户端，通过以下代码查看日志
+The runtime takes some time to compile and generate the ngrok server and client, check the logs with the following code
 ```
 docker logs -t -f --tail=100 ngrok-server
 ```
-当出现以下日志时表示启动成功
-![info](https://raw.githubusercontent.com/jueying/docker-ngrok-server/master/files/ngrokd_start.jpg)
+When the following logs appear, it means the startup is successful
+! [info](https://raw.githubusercontent.com/jueying/docker-ngrok-server/master/files/ngrokd_start.jpg)
 
-### 3. 从容器内拷贝ngrok客户端:
+### 3. Copy the ngrok client from the container.
 ```
 docker cp ngrok-server:/usr/local/ngrok/bin/ /root/ngrok/
 ```
-在/tmp/bin/中可以找到win64, win32和macos64对应的客户端
+The clients for win64, win32 and macos64 can be found in /tmp/bin/
 
-### 4. ngrok配置使用:
+### 4. ngrok configuration usage.
 
-1. 将你的独立域名泛解析到docker所在主机ip
-![info](https://raw.githubusercontent.com/jueying/docker-ngrok-server/master/files/domain.jpg)
+1. pan-resolve your independent domain name to docker's host IP
+! [info](https://raw.githubusercontent.com/jueying/docker-ngrok-server/master/files/domain.jpg)
 
-2. 从容器内拷贝出相应的ngrok客户端，然后在同级目录建立配置文件ngrok.cfg,内容如下：
+2. Copy the corresponding ngrok client from the container, and then create a configuration file ngrok.cfg in the same level directory, with the following content:
 ```
-server_addr: "你的域名:隧道端口"
+server_addr: "your domain:tunnel port"
 trust_host_root_certs: false
 ```
-将your_domain和tunnel_port换成自己启动容器时设置的值
-windows平台通过以下命令启动:
+Replace your_domain and tunnel_port with the values you set when you start the container
+The windows platform is started with the following command.
 ```
-ngrok.exe -subdomain=子域名 -config=ngrok.cfg 本地端口
+ngrok.exe -subdomain=subdomain -config=ngrok.cfg local_port
 
-./ngrok -config=ngrok.cfg start-all
+. /ngrok -config=ngrok.cfg start-all
 
 ```
-可以在files文件夹中[下载](https://github.com/jueying/docker-ngrok-server/blob/master/files/ngrok-client.rar)我的ngrok客户端配置，然后修改你的域名，并替换为你的ngrok客户端。
+You can [download](https://github.com/jueying/docker-ngrok-server/blob/master/files/ngrok-client.rar) my ngrok client configuration in the files folder, then modify your domain name and replace it with your ngrok client.
 
 ---
-## 注意事项
+## Caution.
 ---
-1. 每次启动一个新的容器时，会生成配套的ngrok服务端和客户端。所以如果重新启动一个新的容器，需要重新拷贝新的ngrok客户端出来。启动已有的容器不用更新ngrok客户端。
+1. Each time you start a new container, the matching ngrok server and client will be generated. So if you restart a new container, you need to re-copy the new ngrok client out. You don't need to update the ngrok client to start an existing container.
